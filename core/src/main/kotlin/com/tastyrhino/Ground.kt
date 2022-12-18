@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite
 import com.badlogic.gdx.physics.box2d.Body
 import com.badlogic.gdx.physics.box2d.World
 import ktx.box2d.body
-import ktx.box2d.box
+import ktx.box2d.polygon
 import ktx.collections.GdxArray
 
 class Ground(world: World) : LevelObject {
@@ -18,7 +18,10 @@ class Ground(world: World) : LevelObject {
     init {
         for (i in 0 until elements) {
             bodies.add(world.body {
-                box(elementSize, 5f)
+                //box(elementSize, 5f)
+                PhysicsObjectLoader.ground.map {
+                    polygon(*it.scaleAndCenterX(50f, 100f, 50f - 2.5f))
+                }
                 position.set(elementSize / 2f + i * elementSize, 2.5f)
             })
         }
@@ -48,11 +51,12 @@ class Ground(world: World) : LevelObject {
     }
 
     override fun draw(batch: Batch?, parentAlpha: Float) {
-
         bodies.forEach {
-            groundSprite.transformFromBody(it)
-            groundSprite.draw(batch)
+            groundSprite.transformFromBodyAndDraw(it, batch)
         }
+    }
+
+    override fun reset() {
     }
 }
 

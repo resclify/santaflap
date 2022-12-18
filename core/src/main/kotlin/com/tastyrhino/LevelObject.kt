@@ -9,5 +9,6 @@ interface LevelObject {
     fun update(delta: Float)
 
     fun draw(batch: Batch?, parentAlpha: Float)
+    fun reset()
 
 }

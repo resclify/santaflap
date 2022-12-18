@@ -32,4 +32,5 @@ dependencies {
     api "io.github.libktx:ktx-vis:$ktxVersion"
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesVersion"
+    api "com.badlogicgames.gdx:gdx-tools:1.11.0"
 }

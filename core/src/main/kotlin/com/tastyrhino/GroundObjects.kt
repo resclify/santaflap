@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.MathUtils
 import com.badlogic.gdx.physics.box2d.Body
 import com.badlogic.gdx.physics.box2d.World
 import ktx.box2d.body
-import ktx.box2d.box
+import ktx.box2d.polygon
 import ktx.collections.GdxArray
 
 class GroundObjects(world: World) : LevelObject {
@@ -30,16 +30,19 @@ class GroundObjects(world: World) : LevelObject {
     init {
         for (i in 0 until 5) {
             building1Bodies.add(world.body {
-                box(40f * 0.64f, 40f)
-                position.set(200f + 200f * i, MathUtils.random(5f, 12f))
+                PhysicsObjectLoader.building1.map {
+                    polygon(*it.scaleAndCenterX(40f * 0.64f, 40f * 0.64f, -7.2f))
+                }
+                //box(40f * 0.64f, 40f)
             })
 
             building2Bodies.add(world.body {
-                box(40f * 0.64f, 40f)
-                position.set(300f + 200f * i, MathUtils.random(5f, 12f))
+                PhysicsObjectLoader.building2.map {
+                    polygon(*it.scaleAndCenterX(40f * 0.64f, 40f * 0.64f, -7.2f))
+                }
+                //box(40f * 0.64f, 40f)
             })
         }
-
 
         allBuildingBodies.addAll(building1Bodies)
         allBuildingBodies.addAll(building2Bodies)
@@ -92,6 +95,20 @@ class GroundObjects(world: World) : LevelObject {
         return maxHeight
     }
 
+    override fun reset() {
+        var currentPos = 230f
+
+        for (i in 0 until building1Bodies.size) {
+            building1Bodies[i].setPosX(currentPos)
+            building1Bodies[i].setPosY(MathUtils.random(5f, 8f))
+            currentPos += MathUtils.random(60f, 100f)
+
+            building2Bodies[i].setPosX(currentPos)
+            building2Bodies[i].setPosY(MathUtils.random(4f, 6f))
+            currentPos += MathUtils.random(60f, 100f)
+        }
+    }
+
     override fun draw(batch: Batch?, parentAlpha: Float) {
         building1Bodies.forEach {
             building1Sprite.transformFromBodyAndDraw(it, batch)
@@ -103,7 +120,7 @@ class GroundObjects(world: World) : LevelObject {
 }
 
 
-private fun Sprite.transformFromBodyAndDraw(body: Body, batch: Batch?) {
+fun Sprite.transformFromBodyAndDraw(body: Body, batch: Batch?) {
     transformFromBody(body)
     draw(batch)
 }
