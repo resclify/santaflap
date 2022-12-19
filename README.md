@@ -2,6 +2,8 @@
 
 A small game made for libGDX Jam 23 with the theme "DYSTOPIAN CHRISTMAS".
 
+![screenshot.png](screenshot.png)
+
 **Download:** https://tasty-rhino.itch.io/santa-flap
 
 A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/tommyettinger/gdx-liftoff).
