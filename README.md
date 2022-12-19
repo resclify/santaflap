@@ -1,4 +1,4 @@
-# SantaFlap
+# Santa Flap
 
 A small game made for libGDX Jam 23 with the theme "DYSTOPIAN CHRISTMAS".
 
